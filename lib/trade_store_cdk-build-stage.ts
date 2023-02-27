@@ -92,7 +92,7 @@ export class TradeStoreCdkBuildStack extends Stack {
         version: "0.2",
         phases: {
           install: {
-            commands: ["npm install"],
+            commands: ["npm install", "npm update -g aws-cdk"],
           },
           build: {
             commands: [
