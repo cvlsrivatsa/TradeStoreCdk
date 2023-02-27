@@ -86,8 +86,8 @@ export class TradeStoreCdkBuildStack extends Stack {
       ],
     });
 
-    const cdk_project = new PipelineProject(this, "CdkCodeBuildProject", {
-      // source: gitHubCdkSource,
+    const cdk_project = new Project(this, "CdkCodeBuildProject", {
+      source: gitHubCdkSource,
       buildSpec: BuildSpec.fromObject({
         version: "0.2",
         phases: {
@@ -109,8 +109,8 @@ export class TradeStoreCdkBuildStack extends Stack {
       }),
     });
 
-    const app_project = new PipelineProject(this, "myProject", {
-      // source: gitHubSource,
+    const app_project = new Project(this, "myProject", {
+      source: gitHubSource,
       environment: {
         buildImage: LinuxBuildImage.AMAZON_LINUX_2_4,
         privileged: true,
