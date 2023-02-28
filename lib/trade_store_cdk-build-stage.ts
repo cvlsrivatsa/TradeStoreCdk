@@ -177,7 +177,7 @@ export class TradeStoreCdkBuildStack extends Stack {
     const cdkBuildOutput = new Artifact();
     const buildOutput = new Artifact();
 
-    const cdkSourceAction = new codepipeline_actions.GitHubV2SourceAction({
+    const cdkSourceAction = new codepipeline_actions.GitHubSourceAction({
       actionName: "github_cdk_source",
       owner: githubUserName.valueAsString,
       repo: githubCdkRepository.valueAsString,
@@ -202,15 +202,15 @@ export class TradeStoreCdkBuildStack extends Stack {
     const cdkBuildAction = new codepipeline_actions.CodeBuildAction({
       actionName: "cdk_build",
       project: cdk_project,
-      input: sourceOutput,
-      outputs: [buildOutput], // optional
+      input: cdkSourceOutput,
+      outputs: [cdkBuildOutput],
     });
 
     const buildAction = new codepipeline_actions.CodeBuildAction({
       actionName: "app_build",
       project: app_project,
-      input: cdkSourceOutput,
-      outputs: [cdkBuildOutput],
+      input: sourceOutput,
+      outputs: [buildOutput], // optional
     });
 
     const manualApprovalAction = new codepipeline_actions.ManualApprovalAction({
