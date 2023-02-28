@@ -136,7 +136,7 @@ export class TradeStoreCdkBuildStack extends Stack {
               'export tag=${CODEBUILD_RESOLVED_SOURCE_VERSION}'
             ]
             */
-            commands: ["env", "export tag=latest"],
+            commands: ["env", "export tag=latest", "ls -al"],
           },
           build: {
             commands: [
