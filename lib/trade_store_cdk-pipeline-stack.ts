@@ -7,7 +7,6 @@ import {
 } from "aws-cdk-lib/pipelines";
 import { Construct } from "constructs";
 import { TradeStoreCdkStage } from "./trade_store_cdk-stage";
-import { TradeStoreCdkBuildStage } from "./trade_store_cdk-build-stage";
 import { ManualApprovalAction } from "aws-cdk-lib/aws-codepipeline-actions";
 
 /**
@@ -33,12 +32,6 @@ export class TradeStoreCdkPipelineStack extends Stack {
       }),
       selfMutation: true,
     });
-
-    const buildStage = pipeline.addStage(
-      new TradeStoreCdkBuildStage(this, "Build", {
-        env: { account: "191296374569", region: "us-east-1" },
-      })
-    );
 
     const devApp = new TradeStoreCdkStage(this, "Devo", {
       env: { account: "191296374569", region: "us-west-2" },
