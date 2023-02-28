@@ -96,7 +96,7 @@ export class TradeStoreCdkBuildStack extends Stack {
         version: "0.2",
         phases: {
           install: {
-            commands: ["npm install", "npm update -g aws-cdk"],
+            commands: ["npm install", "n 14.19.0", "npm update -g aws-cdk"],
           },
           build: {
             commands: [
@@ -177,7 +177,7 @@ export class TradeStoreCdkBuildStack extends Stack {
     const cdkBuildOutput = new Artifact();
     const buildOutput = new Artifact();
 
-    const cdkSourceAction = new codepipeline_actions.GitHubSourceAction({
+    const cdkSourceAction = new codepipeline_actions.GitHubV2SourceAction({
       actionName: "github_cdk_source",
       owner: githubUserName.valueAsString,
       repo: githubCdkRepository.valueAsString,
