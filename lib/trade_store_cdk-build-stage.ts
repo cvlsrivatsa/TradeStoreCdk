@@ -88,6 +88,10 @@ export class TradeStoreCdkBuildStack extends Stack {
 
     const cdk_project = new PipelineProject(this, "CdkCodeBuildProject", {
       // source: gitHubCdkSource,
+      environment: {
+        buildImage: LinuxBuildImage.AMAZON_LINUX_2_4,
+        privileged: true,
+      },
       buildSpec: BuildSpec.fromObject({
         version: "0.2",
         phases: {
